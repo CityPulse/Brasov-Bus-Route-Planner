@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        applicationId "com.siemens.ct.citypulse.brasovbus"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    packagingOptions {
+        exclude 'META-INF/maven/com.siemens.citypulse/brasov-commons/pom.xml'
+        exclude 'META-INF/maven/com.siemens.citypulse/brasov-commons/pom.properties'
+    }
+}
+
+repositories {mavenCentral()}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar']) 
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    //dependencies {compile 'javax.websocket:javax.websocket-client-api:1.0'}
+    dependencies {compile 'org.glassfish.tyrus:tyrus-client:1.1'}
+    dependencies {compile 'org.glassfish.tyrus:tyrus-container-grizzly:1.1'}
+    //dependencies {compile 'javax.json:javax.json-api:1.0'}
+    dependencies {compile 'org.glassfish:javax.json:1.0.1'}
+    dependencies {compile 'com.google.code.gson:gson:2.3.1'}
+    //dependencies {compile 'com.sun.jersey:jersey-client:1.19.1'}
+
+
+
+}
