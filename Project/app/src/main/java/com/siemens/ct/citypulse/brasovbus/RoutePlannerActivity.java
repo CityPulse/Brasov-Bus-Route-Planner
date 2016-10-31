@@ -2,6 +2,7 @@ package com.siemens.ct.citypulse.brasovbus;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -53,9 +54,12 @@ public class RoutePlannerActivity extends AppCompatActivity {
     private static final String TAG = "BrasovBus_RouteCreator";
     private String requestToServer = null;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_route_planner);
 
         startLocationTextField = (AutoCompleteTextView) findViewById(R.id.startLocationTextField);
