@@ -65,7 +65,7 @@ public class ReportTrafficIncidentActivity extends AppCompatActivity implements 
             closestBusStationCoordinatesInitial = new Gson().fromJson(closestBusStationCoordinatesInitialString, type);
         }
 
-        System.out.println("closestBusStationCoordinatesInitialString: "+closestBusStationCoordinatesInitialString);
+        Log.i(TAG, "closestBusStationCoordinatesInitialString: "+closestBusStationCoordinatesInitialString);
 
         startLocationUpdateBroadcastReceiver();
 
@@ -88,7 +88,7 @@ public class ReportTrafficIncidentActivity extends AppCompatActivity implements 
                     incident.setCategory("Road works");
                 }
 
-                System.out.println(System.currentTimeMillis());
+                //System.out.println(System.currentTimeMillis());
                 String timestamp = new String(Long.toString(System.currentTimeMillis()));
                 timestamp = timestamp.substring(0, 10); //limit the timestamp length to 10 numbers
                 incident.setTimestamp(timestamp);
@@ -147,13 +147,13 @@ public class ReportTrafficIncidentActivity extends AppCompatActivity implements 
 
     private void startLocationUpdateBroadcastReceiver() {
 
-        System.out.println("Started receiver from ReportTrafficIncidentActivity");
+        Log.i(TAG, "Started receiver from ReportTrafficIncidentActivity");
 
         locationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 closestBusStationName = intent.getStringExtra(Constants.LOCATION_UPDATE_MESSAGE_PAYLOAD);
-                System.out.println("closestBusStationName in REPORT ACTIVITY: "+closestBusStationName);
+                Log.i(TAG, "closestBusStationName in REPORT ACTIVITY: "+closestBusStationName);
             }
         };
 
@@ -308,7 +308,7 @@ public class ReportTrafficIncidentActivity extends AppCompatActivity implements 
             }
 
             try {
-                System.out.println("incident: "+new Gson().toJson(incident));
+                Log.i(TAG, "incident: "+new Gson().toJson(incident));
                 output.write(String.valueOf((new Gson().toJson(incident))));
                 output.close();
             } catch (IOException e) {

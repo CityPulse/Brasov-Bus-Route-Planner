@@ -120,7 +120,7 @@ public class NavigationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println("Button pressed !");
+                Log.i(TAG,"Report traffic incidents button was pressed !");
 
                 if(closestBusStationName!=null) {
                     Intent reportIncidentActivityIntent = new Intent(NavigationActivity.this, ReportTrafficIncidentActivity.class);
@@ -145,7 +145,7 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void startLocationUpdateBroadcastReceiver() {
 
-        System.out.println("Started LOCATION receiver");
+        Log.i(TAG, "Started LOCATION receiver");
 
         locationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -156,7 +156,7 @@ public class NavigationActivity extends AppCompatActivity {
 
                 if(listOfStations.contains(closestBusStationName)) {
 
-                    System.out.println("Station: "+closestBusStationName+" at index: "+listOfStations.indexOf(closestBusStationName));
+                    Log.i(TAG, "Station: "+closestBusStationName+" at index: "+listOfStations.indexOf(closestBusStationName));
                     int position = listOfStations.indexOf(closestBusStationName);
 
                     if(previousPosition==-1)
@@ -195,7 +195,7 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void startAlertsBroadcastReceiver() {
 
-        System.out.println("Started ALERT receiver");
+        Log.i(TAG, "Started ALERT receiver");
 
         alertsBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -254,29 +254,18 @@ public class NavigationActivity extends AppCompatActivity {
                             NavigationActivity.this)
                             .setTitle("Event notification")
                             .setMessage(messageStringBuilder.toString())
-                            .setPositiveButton("Option 2",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(
-                                                DialogInterface dialog,
-                                                int which) {
-
-                                            Intent intent = new Intent();
-                                            //intent.setAction(DefaultValues.COMMAND_GO_TO_PARKING_RECOMANDATION);
-                                            NavigationActivity.this
-                                                    .sendBroadcast(intent);
-                                            NavigationActivity.this.finish();
-                                        }
-                                    })
-                            .setNegativeButton("Option 1",
+                            .setNegativeButton("Go back to route selection",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(
                                                 DialogInterface dialog,
                                                int which) {
-                                            Intent intent = new Intent();
+                                            /*Intent intent = new Intent();
                                             //intent.setAction(Constants.COMMAND_GO_TO_TRAVEL_RECOMANDATION);
                                             NavigationActivity.this
                                                     .sendBroadcast(intent);
-                                            NavigationActivity.this.finish();
+                                            NavigationActivity.this.finish();*/
+
+                                            finish();
                                         }
                                     })
                             .setIcon(android.R.drawable.ic_dialog_alert)
@@ -285,17 +274,15 @@ public class NavigationActivity extends AppCompatActivity {
                                         public void onClick(
                                                 DialogInterface dialog,
                                                 int which) {
-
-                                            System.out
-                                                    .println("The user has decided to continue.");
-
+                                            Log.i(TAG, "The user has decided to continue.");
                                         }
-                                    }).show();
+                                    }
+                            )
+                    .show();
 
                     allerDialogList.add(alertDialog);
                 } else {
-                    System.out
-                            .println("The event was not displayed because it was not well formated!");
+                   Log.i(TAG,"The event was not displayed because it was not well formated!");
                 }
             }
         };
@@ -307,7 +294,7 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void startErrorBroadcastReceiver() {
 
-        System.out.println("Started ERROR receiver");
+        Log.i(TAG, "Started ERROR receiver");
 
         errorBroadcastReceiver = new BroadcastReceiver() {
 
@@ -333,23 +320,29 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        Log.i(TAG, "Dismissing all dialogs in NavigationActivity");
+        for(AlertDialog i : allerDialogList) {
+            i.dismiss();
+        }
+
         unRegisterReceivers();
-        System.out.println("Stopping service EventNotificationService");
+        Log.i(TAG, "Stopping service EventNotificationService");
         stopService(new Intent(NavigationActivity.this,EventNotificationService.class));
         finish();
     }
 
     private void unRegisterReceivers() {
         if(locationBroadcastReceiver!=null) {
-            System.out.println("Unregistered locationBroadcastReceiver");
+            Log.i(TAG, "Unregistered locationBroadcastReceiver");
             unregisterReceiver(locationBroadcastReceiver);
         }
         if(alertsBroadcastReceiver!=null) {
-            System.out.println("Unregistered alertsBroadcastReceiver");
+            Log.i(TAG, "Unregistered alertsBroadcastReceiver");
             unregisterReceiver(alertsBroadcastReceiver);
         }
         if(errorBroadcastReceiver!=null) {
-            System.out.println("Unregistered errorBroadcastReceiver");
+            Log.i(TAG, "Unregistered errorBroadcastReceiver");
             unregisterReceiver(errorBroadcastReceiver);
         }
     }

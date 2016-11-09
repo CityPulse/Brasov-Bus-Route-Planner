@@ -433,7 +433,7 @@ public class EventNotificationService extends Service {
 				}
 			}
 
-			System.out.println("location changed, current station: "+closestStationName);
+			Log.i(TAG,"Location changed, current station: "+closestStationName);
 			Intent intent = new Intent();
 			intent.setAction(Constants.LOCATION_UPDATE_MESSAGE);
 			intent.putExtra(

@@ -122,14 +122,14 @@ public class RoutesSelectionActivity extends AppCompatActivity {
         int currentRouteIndexForActivityInterface = 1;
         for (CompleteBusStationDetails completeBusStationDetails : processedAnswers) {
             Map<String, String> datum = new HashMap<String, String>(2);
-            datum.put("title", "Ruta " + currentRouteIndexForActivityInterface + ": aprox. " + completeBusStationDetails.getAnswerFromDS().getNumber_of_seconds() + " sec");
+            datum.put("title", "Ruta " + currentRouteIndexForActivityInterface + ": aprox. " + (completeBusStationDetails.getAnswerFromDS().getNumber_of_seconds())/60 + " min");
             datum.put("description", completeBusStationDetails.toString());
 
             dataToDisplay.add(datum);
             currentRouteIndexForActivityInterface++;
         }
 
-        Log.i(TAG,"##dataToDisplay: "+dataToDisplay);
+        Log.i(TAG,"dataToDisplay: "+dataToDisplay);
 
         resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
