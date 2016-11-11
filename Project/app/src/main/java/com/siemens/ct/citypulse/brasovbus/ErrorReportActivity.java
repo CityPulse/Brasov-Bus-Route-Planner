@@ -18,7 +18,16 @@ public class ErrorReportActivity extends AppCompatActivity {
 
         TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
 
-        System.out.println("error: "+error.toCharArray());
-        errorTextView.setText(error.toCharArray(),0,error.length());
+       /* if(error!=null) {
+            System.out.println("error: " + error.toCharArray());
+            errorTextView.setText(error.toCharArray(), 0, error.length());
+        }
+        else
+        {
+            error = "Unknown error";
+            errorTextView.setText(error.toCharArray(), 0, error.length());
+        }*/
+        System.out.println("error: " + error.toCharArray());
+        errorTextView.setText(error.toCharArray(), 0, error.length());
     }
 }

@@ -347,12 +347,12 @@ public class ReportTrafficIncidentActivity extends AppCompatActivity implements 
                     }
                 });
                 Log.i(TAG,"INFO: incident: "+incident+", has been successfully registered");
-                try {
+/*                try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-                finish();
+                }*/
+                //finish();
             }else{
                 Log.i(TAG,"ERROR: unable to send the request because the following rest service " +
                         "is not available: " + Constants.TRAFFIC_INCIDENTS_REPORT_END_POINT +

@@ -104,9 +104,11 @@ public class NavigationActivity extends AppCompatActivity {
         Log.i(TAG, "Starting navigation");
 
         //interpret the received command
-        Intent eventNotificationServiceIntent = new Intent(this, EventNotificationService.class);
-        eventNotificationServiceIntent.putExtra("cf_request", new Gson().toJson(completeBusStationDetails));
-        startService(eventNotificationServiceIntent);
+        if(completeBusStationDetails!=null) {
+            Intent eventNotificationServiceIntent = new Intent(this, EventNotificationService.class);
+            eventNotificationServiceIntent.putExtra("cf_request", new Gson().toJson(completeBusStationDetails));
+            startService(eventNotificationServiceIntent);
+        }
 
         //========== Starting receivers ==============
         startLocationUpdateBroadcastReceiver();

@@ -229,6 +229,8 @@ public class EventNotificationService extends Service {
                         return 1000;
                     }
                 }, "The user stopped the reasoning."));
+				Log.i(TAG, "Session is not null and is going to close from stopThread().");
+				session = null;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -321,13 +323,16 @@ public class EventNotificationService extends Service {
 					Thread.sleep(Constants.EVENT_NOTIFICATION_SERVICE_PERIOD);
 				}
 
-				session.close(new CloseReason(new CloseCode() {
+				if(session!=null) {
+					Log.i(TAG, "Session is not null and is going to close.");
+					session.close(new CloseReason(new CloseCode() {
 
-					@Override
-					public int getCode() {
-						return 1000;
-					}
-				}, "The user stopped the reasoning."));
+						@Override
+						public int getCode() {
+							return 1000;
+						}
+					}, "The user stopped the reasoning."));
+				}
 
 			} catch (DeploymentException e) {
 				Log.i(TAG,"Unable to open the connection with contextual filtering for parking  Deployment exception",e);
