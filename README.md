@@ -12,6 +12,8 @@ In order to allow the application developer to use Google Maps services, he/she 
 * Import the project in his/hers preffered IDE.
 * Edit the AndroidManifest.xml file al line 53(the key to be more exact)
 * In order to obain the new keys, we will need to get the SHA1 key from his IDE and go to https://console.developers.google.com/home/dashboard to get a new key. This will allow him to run the application while still connected via USB cable to the computer.
+
+The application developer also has to edit the Constants.java . He will need to adapt to his scenario the Decision Support, Contextual Fintering and Traffic incidents reporting endpoint URLs.(lines 34,36,38 in Constants.java)
   
 ## Contributers
 
