@@ -20,6 +20,8 @@ import javax.websocket.EndpointConfig;
 import javax.websocket.MessageHandler;
 import javax.websocket.Session;
 
+import org.glassfish.grizzly.filterchain.FilterChain;
+import org.glassfish.grizzly.filterchain.FilterChainContext;
 import org.glassfish.tyrus.client.ClientManager;
 
 import android.Manifest;
@@ -222,8 +224,8 @@ public class EventNotificationService extends Service {
 			stopThread = true;
 
 			try {
-				session.close(new CloseReason(new CloseCode() {
 
+				session.close(new CloseReason(new CloseCode() {
                     @Override
                     public int getCode() {
                         return 1000;
@@ -270,6 +272,7 @@ public class EventNotificationService extends Service {
 					.build();
 
 			ClientManager clientManager = ClientManager.createClient();
+
 
 			Endpoint clientEndpoint = new Endpoint() {
 
@@ -325,6 +328,7 @@ public class EventNotificationService extends Service {
 
 				if(session!=null) {
 					Log.i(TAG, "Session is not null and is going to close.");
+
 					session.close(new CloseReason(new CloseCode() {
 
 						@Override

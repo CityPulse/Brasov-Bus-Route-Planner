@@ -11,8 +11,11 @@ import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -51,7 +54,9 @@ public class NavigationActivity extends AppCompatActivity {
     private LinkedList<String> listOfStations = new LinkedList<String>();
     private String closestBusStationName = null;
 
-    int previousPosition = -1;
+    private int position = -1;
+    private int apparentPosition = 0;
+    private int previousPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +105,34 @@ public class NavigationActivity extends AppCompatActivity {
         ArrayAdapter simpleAdapter = new ArrayAdapter (this,
                 android.R.layout.simple_list_item_1, listOfStations);
         resultsListView.setAdapter(simpleAdapter);
+        resultsListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                try {
+                    final int firstListItemPosition = resultsListView.getFirstVisiblePosition();
+                    final int lastListItemPosition = firstListItemPosition + resultsListView.getLastVisiblePosition() - 1;
+
+                    if (position >= firstListItemPosition && position <= lastListItemPosition) {
+                        resultsListView.getChildAt(position - firstListItemPosition).setBackgroundResource(R.color.colorPrimaryLight);
+                    } else {
+                        for (int i = firstListItemPosition; i <= lastListItemPosition; i++) {
+                            resultsListView.getChildAt(i).setBackgroundResource(R.color.colorDefault);
+                        }
+                    }
+                }
+                catch (NullPointerException e)
+                {
+
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+
 
         Log.i(TAG, "Starting navigation");
 
@@ -159,34 +192,52 @@ public class NavigationActivity extends AppCompatActivity {
                 if(listOfStations.contains(closestBusStationName)) {
 
                     Log.i(TAG, "Station: "+closestBusStationName+" at index: "+listOfStations.indexOf(closestBusStationName));
-                    int position = listOfStations.indexOf(closestBusStationName);
+                    position = listOfStations.indexOf(closestBusStationName);
 
-                    if(previousPosition==-1)
+                    final int firstListItemPosition = resultsListView.getFirstVisiblePosition();
+                    final int lastListItemPosition = firstListItemPosition + resultsListView.getLastVisiblePosition() - 1;
+                    System.out.println("firstListItemPosition: "+firstListItemPosition);
+                    System.out.println("lastListItemPosition: "+lastListItemPosition);
+                    System.out.println("position: "+position + " at station: "+listOfStations.get(position));
+
+
+                    if (position >= firstListItemPosition && position <= lastListItemPosition)
                     {
-                        for(int i=0;i<listOfStations.size();i++)
-                            resultsListView.getChildAt(i).setBackgroundResource(R.color.colorDefault);
+                        System.out.println("Available position");
 
-                        resultsListView.getChildAt(position).setBackgroundResource(R.color.colorPrimaryLight);
-                        previousPosition = position;
+                        apparentPosition = position - firstListItemPosition;
+                        resultsListView.getChildAt(apparentPosition).setBackgroundResource(R.color.colorPrimaryLight);
+
+                        for (int i = 0; i < resultsListView.getChildCount(); i++)
+                        {
+                            if(i!=apparentPosition)
+                                resultsListView.getChildAt(i).setBackgroundResource(R.color.colorDefault);
+                        }
+
+
+                        if (position != previousPosition) {
+                            if(previousPosition!=-1) {
+                                resultsListView.getChildAt(previousPosition - firstListItemPosition).setBackgroundResource(R.color.colorDefault);
+                                resultsListView.getChildAt(apparentPosition).setBackgroundResource(R.color.colorPrimaryLight);
+                            }
+                            previousPosition = position;
+                        }
                     }
 
-                    if(position != previousPosition) {
-                        resultsListView.getChildAt(previousPosition).setBackgroundResource(R.color.colorDefault);
-                        resultsListView.getChildAt(position).setBackgroundResource(R.color.colorPrimaryLight);
-                        previousPosition = position;
+                    else
+                    {
+                            for (int i = firstListItemPosition; i <= lastListItemPosition; i++)
+                            {
+                                    resultsListView.getChildAt(i).setBackgroundResource(R.color.colorDefault);
+                            }
                     }
 
-                    /*resultsListView.getChildAt(position).setBackgroundColor(0xff0000ff);
-                    previousPosition = position;
-
-                    for(int i=0; i<listOfStations.size();i++) {
-                        if(i==position)
-                            resultsListView.getChildAt(position).setBackgroundColor(0xff0000ff);
-                        else
-                            resultsListView.getChildAt(i).setBackgroundColor(0xffffffff);
-                    }*/
                 }
+
+
+
             }
+
         };
 
         IntentFilter latestLocationIntentFilter = new IntentFilter();
