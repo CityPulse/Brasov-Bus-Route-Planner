@@ -195,7 +195,7 @@ public class NavigationActivity extends AppCompatActivity {
                     position = listOfStations.indexOf(closestBusStationName);
 
                     final int firstListItemPosition = resultsListView.getFirstVisiblePosition();
-                    final int lastListItemPosition = firstListItemPosition + resultsListView.getLastVisiblePosition() - 1;
+                    final int lastListItemPosition = firstListItemPosition + resultsListView.getLastVisiblePosition() ;
                     System.out.println("firstListItemPosition: "+firstListItemPosition);
                     System.out.println("lastListItemPosition: "+lastListItemPosition);
                     System.out.println("position: "+position + " at station: "+listOfStations.get(position));
