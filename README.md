@@ -6,6 +6,7 @@ In order to demonstrate how the CityPulse framework can be used to develop appli
 
 Figure 1 depict the user interfaces used by the end user to set the travel preferences and the destination start point and end point.
 
+<img src="https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-16-15-20-13.png" width="276" height="489" alt="Figure 1 a) - The user interfaces of the Android application used to select the starting point and ending point" />
 <img src="https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-16-15-20-13.png" width="276" height="489" />
 
 ## Dependencies
