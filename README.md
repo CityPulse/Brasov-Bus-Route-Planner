@@ -25,7 +25,7 @@ The functional constraints and preferences specify different thresholds and mini
 
 After the user selects the preferred route, a request is generated to the Contextual filtering component in order to identify the relevant events for the use while he/she is traveling. 
 
-Once the user has selected one of the routes computed by the Decision support component, the Contextual Filtering component subscribes to the event streams on the route via a Data Bus in order to detect eventual incidents. Whenever there is a new event detected by the Event detection component, the Contextual Filtering component sends a notification to the usesr where he/she has the option to change the current solution and request a new one or ignore the event. 
+Once the user has selected one of the routes computed by the Decision support component, the Contextual Filtering component subscribes to the event streams on the route via a Data Bus in order to detect eventual incidents. Whenever there is a new event detected by the Event detection component, the Contextual Filtering component sends a notification to the user where he/she has the option to change the current solution and request a new one or ignore the event. 
 
 After the route selection the user is greeted with an interface with a list representing the bus stations that the route contains depicted in Figure 2 b). The closest bus station will be highlighted to inform the user of its location on the route.
 
