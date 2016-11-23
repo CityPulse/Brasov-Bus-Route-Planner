@@ -21,7 +21,7 @@ The functional constraints and preferences specify different thresholds and mini
 
 <img src="https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-17-16-23-09.png" width="276" height="489" alt="Figure 2 a) - The user interfaces of the Android application while selecting the preferred route" />
 <img src="https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-17-16-23-21.png" width="276" height="489" alt="Figure 2 b) - The user interfaces of the Android application while navigating the selected route" />
-<img src="https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-16-15-20-24.png" width="276" height="489" alt="Figure 2 c) - Notification of an incident which appeared on the selected route while the user is travelling"/>
+<img src="https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-17-16-24-04.png" width="276" height="489" alt="Figure 2 c) - Notification of an incident which appeared on the selected route while the user is travelling"/>
 
 After the user selects the preferred route, a request is generated to the Contextual filtering component in order to identify the relevant events for the use while he/she is traveling. 
 
@@ -30,6 +30,10 @@ Once the user has selected one of the routes computed by the Decision support co
 After the route selection the user is greeted with an interface with a list representing the bus stations that the route contains depicted in Figure 2 b). The closest bus station will be highlighted to inform the user of its location on the route.
 
 Figure 2 c) depicts the notification received by the end user, while she/he is traveling and an incident is detected on his/hers route.
+
+<img src="https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-17-16-23-29.png" width="276" height="489" alt="Figure 2 d) -The user interfaces of the Android application while reporting an incident"/>
+
+The user also has the posibility of reporting an incident by pressing the "Report incident" button that will open a new interface (Figure 2 d) where he/she will be able to select from two types on incidents, more can be added in the future. All the users that have a common route with the user reporting the incident will be notified. 
 
 
 ## Dependencies
