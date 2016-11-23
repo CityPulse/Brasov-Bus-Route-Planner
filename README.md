@@ -8,6 +8,8 @@ Figure 1 depict the user interfaces used by the end user to set the travel prefe
 
 ![alt text](https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-16-15-20-13.png "Figure 1 a)- The user interfaces of the Android application used to select the starting point and the ending point"){: style="float:right"}
 
+<img src="https://github.com/CityPulse/Brasov-Bus-Route-Planner/blob/master/Images/Screenshot_2016-11-16-15-20-13.png" width="200" height="200" />
+
 ## Dependencies
 
 In order to allow the application developer to use Google Maps services, he/she will need to follow there steps:
